@@ -1370,6 +1370,9 @@ MonoBehaviour:
   golesDerecha: 0
   contadorIzquierda: {fileID: 1980710247}
   contadorDerecha: {fileID: 1552787744}
+  audioGol: {fileID: 8300000, guid: 60d242921557d28499297ef72c86bb32, type: 3}
+  audioRaqueta: {fileID: 8300000, guid: 240653382c8f6a84284cdf3ff4952e7b, type: 3}
+  audioRebote: {fileID: 8300000, guid: eb7fb7b8dfb875f4cad92b15904c2c9f, type: 3}
 --- !u!82 &414561147
 AudioSource:
   m_ObjectHideFlags: 0
