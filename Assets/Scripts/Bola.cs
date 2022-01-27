@@ -14,11 +14,15 @@ public class Bola : MonoBehaviour
     //Cajas de texto de los contadores
     public Text contadorIzquierda;
     public Text contadorDerecha;
+    //Audio Source
+    AudioSource fuenteDeAudio;
+    public AudioClip audioGol, audioRaqueta, audioRebote;
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = Vector2.right * velocidad;
         contadorIzquierda.text = golesIzquierda.ToString();
         contadorDerecha.text = golesDerecha.ToString();
+        fuenteDeAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -69,6 +73,13 @@ public class Bola : MonoBehaviour
             //Aplico velocidad
             GetComponent<Rigidbody2D>().velocity = direccion * velocidad;
 
+        }
+        if (micolision.gameObject.name == "Arriba" || micolision.gameObject.name == "Abajo")
+        {
+
+            //Reproduzco el sonido del rebote
+            fuenteDeAudio.clip = audioRebote;
+            fuenteDeAudio.Play();
         }
     }
 
@@ -121,5 +132,7 @@ public class Bola : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = Vector2.left * velocidad;
             //Vector2.left es lo mismo que new Vector2(-1,0)
         }
+        fuenteDeAudio.clip = audioGol;
+        fuenteDeAudio.Play();
     }
 }
