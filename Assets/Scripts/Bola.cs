@@ -26,7 +26,7 @@ public class Bola : MonoBehaviour
         //micolision.transform.position es la posición de la raqueta
 
         //Si choca con la raqueta izquierda
-        if (micolision.gameObject.name == "Raqueta Izquierda")
+        if (micolision.gameObject.name == "RaquetaIzquierda")
         {
 
             //Valor de x
@@ -44,7 +44,7 @@ public class Bola : MonoBehaviour
         }
 
         //Si choca con la raqueta derecha
-        if (micolision.gameObject.name == "Raqueta Derecha")
+        if (micolision.gameObject.name == "RaquetaDerecha")
         {
 
             //Valor de x
