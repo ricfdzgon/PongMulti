@@ -7,9 +7,18 @@ public class Bola : MonoBehaviour
     public float velocidad = 30.0f;
     // Start is called before the first frame update
 
+    //Contadores de goles
+    public int golesIzquierda = 0;
+    public int golesDerecha = 0;
+
+    //Cajas de texto de los contadores
+    public Text contadorIzquierda;
+    public Text contadorDerecha;
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = Vector2.right * velocidad;
+        contadorIzquierda.text = golesIzquierda.ToString();
+        contadorDerecha.text = golesDerecha.ToString();
     }
 
     // Update is called once per frame
@@ -78,6 +87,39 @@ public class Bola : MonoBehaviour
         else
         {
             return 0; //Si choca por la parte central de la raqueta, sale en horizontal
+        }
+    }
+    //Reinicio la posición de la bola
+    public void reiniciarBola(string direccion)
+    {
+
+        //Posición 0 de la bola
+        transform.position = Vector2.zero;
+        //Vector2.zero es lo mismo que new Vector2(0,0);
+
+        //Velocidad inicial de la bola
+        velocidad = 30;
+
+        //Velocidad y dirección
+        if (direccion == "Derecha")
+        {
+            //Incremento goles al de la derecha
+            golesDerecha++;
+            //Lo escribo en el marcador
+            contadorDerecha.text = golesDerecha.ToString();
+            //Reinicio la bola
+            GetComponent<Rigidbody2D>().velocity = Vector2.right * velocidad;
+            //Vector2.right es lo mismo que new Vector2(1,0)
+        }
+        else if (direccion == "Izquierda")
+        {
+            //Incremento goles al de la izquierda
+            golesIzquierda++;
+            //Lo escribo en el marcador
+            contadorIzquierda.text = golesIzquierda.ToString();
+            //Reinicio la bola
+            GetComponent<Rigidbody2D>().velocity = Vector2.left * velocidad;
+            //Vector2.left es lo mismo que new Vector2(-1,0)
         }
     }
 }
