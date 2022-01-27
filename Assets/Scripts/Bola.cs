@@ -28,6 +28,8 @@ public class Bola : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Incremento la velocidad de la bola
+        velocidad = velocidad + 2 * Time.deltaTime;
     }
 
     void OnCollisionEnter2D(Collision2D micolision)
