@@ -20,6 +20,8 @@ public class Bola : MonoBehaviour
 
     public Text resultado;
 
+    public Text temporizador;
+    private float tiempo = 180;
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = Vector2.right * velocidad;
@@ -38,6 +40,36 @@ public class Bola : MonoBehaviour
     {
         //Incremento la velocidad de la bola
         velocidad = velocidad + 2 * Time.deltaTime;
+        //Si aún no se ha acabado el tiempo, decremento su valor y lo muestro en la caja de texto
+        if (tiempo >= 0)
+        {
+            tiempo -= Time.deltaTime; //Le resto el tiempo transcurrido en cada frame
+            temporizador.text = formatearTiempo(tiempo); //Formateo el tiempo y lo escribo en la caja de texto
+        }
+        //Si se ha acabado el tiempo, compruebo quién ha ganado y se acaba el juego
+        else
+        {
+            temporizador.text = "00:00"; //Para evitar valores negativos	
+                                         //Compruebo quién ha ganado
+            if (golesIzquierda > golesDerecha)
+            {
+                //Escribo y muestro el resultado
+                resultado.text = "¡Jugador Izquierda GANA!\nPulsa I para volver a Inicio\nPulsa P para volver a jugar";
+            }
+            else if (golesDerecha > golesIzquierda)
+            {
+                //Escribo y muestro el resultado
+                resultado.text = "¡Jugador Derecha GANA!\nPulsa I para volver a Inicio\nPulsa P para volver a jugar";
+            }
+            else
+            {
+                //Escribo y muestro el resultado
+                resultado.text = "¡EMPATE!\nPulsa I para volver a Inicio\nPulsa P para volver a jugar";
+            }
+            //Muestro el resultado, pauso el juego y devuelvo true
+            resultado.enabled = true;
+            Time.timeScale = 0; //Pausa
+        }
     }
 
     void OnCollisionEnter2D(Collision2D micolision)
@@ -181,5 +213,16 @@ public class Bola : MonoBehaviour
         {
             return false;
         }
+    }
+    string formatearTiempo(float tiempo)
+    {
+
+        //Formateo minutos y segundos a dos dígitos
+        string minutos = Mathf.Floor(tiempo / 60).ToString("00");
+        string segundos = Mathf.Floor(tiempo % 60).ToString("00");
+
+        //Devuelvo el string formateado con : como separador
+        return minutos + ":" + segundos;
+
     }
 }

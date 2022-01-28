@@ -1374,6 +1374,7 @@ MonoBehaviour:
   audioRaqueta: {fileID: 8300000, guid: 240653382c8f6a84284cdf3ff4952e7b, type: 3}
   audioRebote: {fileID: 8300000, guid: eb7fb7b8dfb875f4cad92b15904c2c9f, type: 3}
   resultado: {fileID: 1813525474}
+  temporizador: {fileID: 666613983}
 --- !u!82 &414561147
 AudioSource:
   m_ObjectHideFlags: 0
