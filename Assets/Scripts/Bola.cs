@@ -17,12 +17,20 @@ public class Bola : MonoBehaviour
     //Audio Source
     AudioSource fuenteDeAudio;
     public AudioClip audioGol, audioRaqueta, audioRebote;
+
+    public Text resultado;
+
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = Vector2.right * velocidad;
         contadorIzquierda.text = golesIzquierda.ToString();
         contadorDerecha.text = golesDerecha.ToString();
         fuenteDeAudio = GetComponent<AudioSource>();
+        //Desactivo la caja de resultado
+        resultado.enabled = false;
+
+        //Quito la pausa
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -121,8 +129,11 @@ public class Bola : MonoBehaviour
             //Lo escribo en el marcador
             contadorDerecha.text = golesDerecha.ToString();
             //Reinicio la bola
-            GetComponent<Rigidbody2D>().velocity = Vector2.right * velocidad;
-            //Vector2.right es lo mismo que new Vector2(1,0)
+            if (!comprobarFinal())
+            {
+                GetComponent<Rigidbody2D>().velocity = Vector2.right * velocidad;
+                //Vector2.right es lo mismo que new Vector2(1,0)
+            }
         }
         else if (direccion == "Izquierda")
         {
@@ -131,10 +142,44 @@ public class Bola : MonoBehaviour
             //Lo escribo en el marcador
             contadorIzquierda.text = golesIzquierda.ToString();
             //Reinicio la bola
-            GetComponent<Rigidbody2D>().velocity = Vector2.left * velocidad;
-            //Vector2.left es lo mismo que new Vector2(-1,0)
+            if (!comprobarFinal())
+            {
+                GetComponent<Rigidbody2D>().velocity = Vector2.left * velocidad;
+                //Vector2.left es lo mismo que new Vector2(-1,0)
+            }
         }
         fuenteDeAudio.clip = audioGol;
         fuenteDeAudio.Play();
+    }
+
+    //Compruebo si alguno ha llegado a 5 goles
+    bool comprobarFinal()
+    {
+
+        //Si el de la izquierda ha llegado a 5
+        if (golesIzquierda == 5)
+        {
+            //Escribo y muestro el resultado
+            resultado.text = "¡Jugador Izquierda GANA!\nPulsa I para volver a Inicio\nPulsa P para volver a jugar";
+            //Muestro el resultado, pauso el juego y devuelvo true
+            resultado.enabled = true;
+            Time.timeScale = 0; //Pausa
+            return true;
+        }
+        //Si el de le aderecha a llegado a 5
+        else if (golesDerecha == 5)
+        {
+            //Escribo y muestro el resultado
+            resultado.text = "¡Jugador Derecha GANA!\nPulsa I para volver a Inicio\nPulsa P para volver a jugar";
+            //Muestro el resultado, pauso el juego y devuelvo true
+            resultado.enabled = true;
+            Time.timeScale = 0; //Pausa
+            return true;
+        }
+        //Si ninguno ha llegado a 5, continúa el juego
+        else
+        {
+            return false;
+        }
     }
 }
