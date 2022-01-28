@@ -652,7 +652,9 @@ MonoBehaviour:
     Jugador Derecha: Flecha arriba/Flecha abajo
 
     Haz
-    clic o pulsa P para jugar.'
+    clic o pulsa P para jugar.
+
+    Pulsa e para salir.'
 --- !u!222 &1552787745
 CanvasRenderer:
   m_ObjectHideFlags: 0

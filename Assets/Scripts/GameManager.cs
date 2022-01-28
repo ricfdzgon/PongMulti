@@ -26,5 +26,10 @@ public class GameManager : MonoBehaviour
             //Cargo la escena de Inicio
             SceneManager.LoadScene("Inicio");
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            //Salgo del juego
+            Application.Quit();
+        }
     }
 }
